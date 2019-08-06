@@ -1,0 +1,1 @@
+lets you count how fast you're clicking on left and right click
