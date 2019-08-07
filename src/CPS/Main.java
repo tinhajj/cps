@@ -1,4 +1,4 @@
-package sample;
+package CPS;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -11,8 +11,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        CurrentTimeProvider timeProvider = new NanoTimeProvider();
-        ClickCounter clickCounter = new ClickCounter(timeProvider);
+        StopWatchFactory stopWatchFactory = new StopWatchFactory(StopWatchType.Milli);
+        ClickCounter clickCounter = new ClickCounter(stopWatchFactory);
 
         Text totalClicksText = new Text();
         totalClicksText.setText("Total Clicks: ");
@@ -45,9 +45,9 @@ public class Main extends Application {
                 (MouseEvent event) -> {
                     clickCounter.countClick(event);
 
-                    leftClicksText.setText("Left Clicks: " + Double.toString(clickCounter.getLeftClicksPerSecond()));
-                    rightClicksText.setText("Right Clicks: " + Double.toString(clickCounter.getRightClicksPerSecond()));
-                    totalClicksText.setText("Total Clicks: " + Double.toString(clickCounter.totalClicksPerSecond()));
+                    leftClicksText.setText("Left Clicks: " + (clickCounter.getLeftClicksPerSecond()));
+                    rightClicksText.setText("Right Clicks: " + (clickCounter.getRightClicksPerSecond()));
+                    totalClicksText.setText("Total Clicks: " + (clickCounter.totalClicksPerSecond()));
                 }
         );
     }

@@ -1,4 +1,4 @@
-package sample;
+package CPS;
 
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -6,19 +6,22 @@ import javafx.scene.input.MouseEvent;
 import java.time.Duration;
 
 public class ClickCounter {
-    CurrentTimeProvider timeProvider;
+    StopWatchFactory stopWatchFactory;
 
-    private TimeDifference initialClickTime;
-    private TimeDifference lastClickTime;
+    private StopWatch initialClickStopWatch;
+    private StopWatch lastClickStopWatch;
 
     private int rightClicksTotal;
     private int leftClicksTotal;
 
-    public ClickCounter(CurrentTimeProvider timeProvider) {
+    public ClickCounter(StopWatchFactory stopWatchFactory) {
         rightClicksTotal = 0;
         leftClicksTotal = 0;
 
-        this.timeProvider = timeProvider;
+        this.stopWatchFactory = stopWatchFactory;
+
+        this.initialClickStopWatch = stopWatchFactory.getStopWatch();
+        this.lastClickStopWatch = stopWatchFactory.getStopWatch();
     }
 
     public void countClick(MouseEvent event) {
@@ -30,12 +33,7 @@ public class ClickCounter {
     }
 
     public boolean clickedInPastSecond() {
-        if (lastClickTime == null) {
-            return false;
-        }
-
-        TimeDifference currentTime = timeProvider.currentTime();
-        Duration elapsedTime = currentTime.timeDifference(lastClickTime);
+        Duration elapsedTime = lastClickStopWatch.elapsedTime();
 
         if (elapsedTime.toMillis() <= 1000) {
             return true;
@@ -47,7 +45,7 @@ public class ClickCounter {
     public void reset() {
         rightClicksTotal = 0;
         leftClicksTotal = 0;
-        initialClickTime = timeProvider.currentTime();
+        initialClickStopWatch.reset();
     }
 
     public void recordClick(MouseEvent event) {
@@ -64,22 +62,20 @@ public class ClickCounter {
                 System.out.println("Unknown key pressed");
         }
 
-        lastClickTime = timeProvider.currentTime();
+        lastClickStopWatch.reset();
     }
 
     public double getRightClicksPerSecond() {
-        TimeDifference currentTime = timeProvider.currentTime();
+        Duration elapsedTime = initialClickStopWatch.elapsedTime();
 
-        Duration elapsedTime = currentTime.timeDifference(initialClickTime);
         Double elapsedSeconds = elapsedTime.toMillis() / 1000d;
 
         return (double) rightClicksTotal / elapsedSeconds;
     }
 
     public double getLeftClicksPerSecond() {
-        TimeDifference currentTime = timeProvider.currentTime();
+        Duration elapsedTime = initialClickStopWatch.elapsedTime();
 
-        Duration elapsedTime = currentTime.timeDifference(initialClickTime);
         Double elapsedSeconds = elapsedTime.toMillis() / 1000d;
 
         return (double) leftClicksTotal / elapsedSeconds;

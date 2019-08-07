@@ -1,4 +1,4 @@
-package sample;
+package CPS;
 
 public class Controller {
 }
