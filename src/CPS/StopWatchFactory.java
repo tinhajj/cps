@@ -13,7 +13,7 @@ public class StopWatchFactory {
     }
 
     public StopWatch getStopWatch() {
-        switch(stopWatchType) {
+        switch (stopWatchType) {
             case Nano:
                 return new NanoStopWatch();
             case Milli:

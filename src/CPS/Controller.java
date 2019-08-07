@@ -9,16 +9,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    private ClickCounter clickCounter;
-
     @FXML
     Text totalClicksText;
-
     @FXML
     Text leftClicksText;
-
     @FXML
     Text rightClicksText;
+    private ClickCounter clickCounter;
 
     public void initialize(URL location, ResourceBundle resource) {
         StopWatchFactory stopWatchFactory = new StopWatchFactory(StopWatchType.Milli);

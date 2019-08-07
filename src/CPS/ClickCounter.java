@@ -35,11 +35,8 @@ public class ClickCounter {
     public boolean clickedInPastSecond() {
         Duration elapsedTime = lastClickStopWatch.elapsedTime();
 
-        if (elapsedTime.toMillis() <= 1000) {
-            return true;
-        }
+        return elapsedTime.toMillis() <= 1000;
 
-        return false;
     }
 
     public void reset() {
@@ -51,7 +48,7 @@ public class ClickCounter {
     public void recordClick(MouseEvent event) {
         MouseButton button = event.getButton();
 
-        switch(button) {
+        switch (button) {
             case PRIMARY:
                 leftClicksTotal++;
                 break;

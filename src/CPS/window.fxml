@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="300.0" prefWidth="600.0"
+      style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" fx:controller="CPS.Controller">
+    <children>
+        <Text fx:id="totalClicksText" fill="WHITE" layoutX="50.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Total Clicks:">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+        <Text fx:id="rightClicksText" fill="WHITE" layoutX="50.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Right Clicks:">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+        <Text fx:id="leftClicksText" fill="WHITE" layoutX="50.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Left Clicks:">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+    </children>
+</Pane>
